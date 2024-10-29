@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('./config/express');
 var debug = require('debug')('com229backend:server');
 var http = require('http');
+var db = require("./config/db");
 
 /**
  * Get port from environment and store in Express.
@@ -18,7 +19,7 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
+var startDB = db();
 var server = http.createServer(app);
 
 /**

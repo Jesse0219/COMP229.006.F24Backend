@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var db = require('./config/mongoose');
+var db = ;
 var app = require('./config/express');
 var debug = require('debug')('comp229backend:server');
 var http = require('http');
