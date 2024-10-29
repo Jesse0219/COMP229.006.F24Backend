@@ -19,7 +19,15 @@ module.exports.create = async function (req, res, next) {
 
 module.exports.list = async function (req, res, next) {
 
-        /// Add your code here.
+        // ... (rest of the method remains the same)
+        try{let cars = await CarModel.find().exec();
+            res.json(cars);
+        } catch (error) {
+            console.log(error);
+            next(error);
+        }
+        let result = await CarModel.find();
+        res.json(result);   
 }
 
 module.exports.carGet = async function (req, res, next) {
@@ -69,22 +77,24 @@ module.exports.update = async function (req, res, next) {
 
 module.exports.remove = async function (req, res, next) {
     try {
-        let uID = ;
+        let carID = req.params.carID;
 
-        let result = await CarModel.deleteOne({ _id: uID });
+        let result = await CarModel.deleteOne({ _id: carID });
         console.log(result);
 
-        if (result.deletedCount > 0) {
+        if (result.deletedCount > 0) {    
             res.json(
                 {
                     success: true,
                     message: 'Car deleted successfully.'
                 }
             );
-        } else {
+        } else {    
+
             // Express will catch this on its own.
             throw new Error('Car not deleted. Are you sure it exists?')
         }
+        
     } catch (error) {
         console.log(error);
         next(error);
